@@ -1,0 +1,48 @@
+{
+    "Name": "data-quality-ge",
+    "ReleaseLabel": "emr-6.10.0",
+    "LogUri": "s3://cjmm-datalake-configs/",
+    "Instances": {
+        "InstanceGroups": [
+            {
+                "Name": "Master nodes",
+                "Market": "ON_DEMAND",
+                "InstanceRole": "MASTER",
+                "InstanceType": "m5.xlarge",
+                "InstanceCount": 1
+            },
+            {
+                "Name": "Worker nodes",
+                "Market": "ON_DEMAND",
+                "InstanceRole": "CORE",
+                "InstanceType": "m5.xlarge",
+                "InstanceCount": 1
+            }
+        ],
+        "KeepJobFlowAliveWhenNoSteps": true,
+        "TerminationProtected": false
+    },
+    "BootstrapActions":[
+        {
+            "Name": "Install dependencies",
+            "ScriptBootstrapAction":{
+                "Path":"s3://cjmm-datalake-configs/scripts/bootstrap-great-expectation.sh"
+            }
+        }
+    ],
+    "Applications": [
+        {"Name": "Spark"},
+        {"Name": "Hadoop"}
+    ],
+    "Configurations": [
+        {
+            "Classification": "spark",
+            "Properties": {
+                "maximizeResourceAllocation": "true"
+            }
+        }
+    ],
+    "VisibleToAllUsers": true,
+    "JobFlowRole": "EMR_EC2_DefaultRole",
+    "ServiceRole": "EMR_DefaultRole"
+}
