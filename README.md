@@ -8,7 +8,7 @@ O [Great Expectations](https://greatexpectations.io/) é uma ferramenta de valid
 
 
 ### Esquema de diretórios
-
+```
 ├───airflow
 │   ├───airflow_infra
 │   ├───dags
@@ -19,3 +19,4 @@ O [Great Expectations](https://greatexpectations.io/) é uma ferramenta de valid
     ├───modules
     |   ├───jobs
     │       └───job_processed_data.py
+```
