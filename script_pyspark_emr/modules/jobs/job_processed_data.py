@@ -1,4 +1,4 @@
-import great_expectations as gx
+import great_expectations as ge
 from great_expectations.core import ExpectationSuite
 from great_expectations.core.batch import RuntimeBatchRequest
 from great_expectations.core.yaml_handler import YAMLHandler
@@ -49,7 +49,7 @@ def config_data_docs_site(context, output_path):
 
 
 def create_context_ge(output_path):
-    context = gx.get_context()
+    context = ge.get_context()
 
     context.add_expectation_suite(
         expectation_suite_name=suite_name
