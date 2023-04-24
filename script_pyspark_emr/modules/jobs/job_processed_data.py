@@ -128,6 +128,6 @@ def process_suite_ge(spark, input_path, output_path):
     context.build_data_docs(site_names=["s3_site"])
 
     if results['success']:
-        print("A suite de testes foi executada com sucesso: " +
+        print("The test suite run successfully: " +
               str(results['success']))
-        print("Ação de validação caso seja necessário")
+        print("Validation action if necessary.")
