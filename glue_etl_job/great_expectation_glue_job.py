@@ -7,6 +7,8 @@ from great_expectations.data_context.types.base import DataContextConfig
 from great_expectations.profile.basic_dataset_profiler import BasicDatasetProfiler
 from great_expectations.dataset.sparkdf_dataset import SparkDFDataset
 from os.path import join
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
 
 yaml = YAMLHandler()
 
@@ -109,9 +111,18 @@ def add_profile_suite(context, df_ge):
     context.save_expectation_suite(expectation_suite, suite_profile_name)
 
 
-def process_suite_ge(spark, input_path, output_path):
+def process_suite_ge(glue_context, input_path, output_path):
     path_data = join(input_path, 'sales', 'amazon.csv')
-    df = spark.read.format("csv").option("header", "true").load(path_data)
+
+    dynamic_frame = glue_context.create_dynamic_frame.from_options(
+        's3',
+        {'paths': [path_data]},
+        format='csv',
+        format_options={'withHeader': True},
+        transformation_ctx='dynamic_frame'
+    )
+
+    df = dynamic_frame.toDF()
     df_ge = SparkDFDataset(df)
 
     context = create_context_ge(output_path)
@@ -128,6 +139,16 @@ def process_suite_ge(spark, input_path, output_path):
     context.build_data_docs(site_names=["s3_site"])
 
     if results['success']:
-        print("The test suite run successfully: " +
+        print("A suite de testes foi executada com sucesso: " +
               str(results['success']))
-        print("Validation action if necessary.")
+        print("Ação de validação caso seja necessário")
+
+
+if __name__ == "__main__":
+    input_path = 's3://cjmm-datalake-raw'
+    output_path = 's3://datadocs-greatexpectations.cjmm'
+
+    sc = SparkContext.getOrCreate()
+    glue_context = GlueContext(sc)
+
+    process_suite_ge(glue_context, input_path, output_path)
