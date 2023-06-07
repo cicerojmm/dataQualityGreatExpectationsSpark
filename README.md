@@ -10,7 +10,7 @@
 ![alt text](https://github.com/cicerojmm/dataQualityGreatExpectationsSpark/blob/main/images/architecture-ge-example1.png?raw=true)
 
 
-#### Case 1: Great Expectations with Spark on Glue ETL Orchestrated by EventBridge (Iac with Terraform)
+#### Case 2: Great Expectations with Spark on Glue ETL Orchestrated by EventBridge (IaC with Terraform)
 ![alt text](https://github.com/cicerojmm/dataQualityGreatExpectationsSpark/blob/main/images/architecture-ge-example2.png?raw=true)
 
 
