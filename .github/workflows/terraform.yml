@@ -28,6 +28,9 @@ jobs:
       - name: Change to Terraform directory
         run: cd glue_etl_job/terraform
 
+      - name: Change to Terraform directory
+        run: ls
+
       - name: Initialize Terraform
         run: terraform init
 
