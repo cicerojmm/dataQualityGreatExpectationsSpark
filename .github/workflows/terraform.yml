@@ -25,20 +25,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       
-      - name: Change to Terraform directory
-        run: cd glue_etl_job/terraform
-
-      - name: Change to Terraform directory
-        run: ls
-
-      - name: Initialize Terraform
-        run: terraform init
-
-      - name: Validate Terraform files
-        run: terraform validate
-
-      - name: Plan Terraform changes
-        run: terraform plan -out=tfplan
-
-      - name: Deploy Terraform changes
-        run: terraform apply -auto-approve tfplan
+      - name: Initialize Terraform and Validate Files
+        working-directory: glue_etl_job/terraform
+        run: |
+          terraform init
+          terraform validate
+          terraform plan -out=tfplan
+          terraform apply -auto-approve tfplan
