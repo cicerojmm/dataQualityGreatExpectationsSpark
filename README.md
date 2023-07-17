@@ -18,7 +18,7 @@
 ```bash
 ├───.github
 │   ├───workflows
-|   |   └───terraform.yml                     # Terraform deploy workflow in AWS for case glue_etl_job
+|   |   └───terraform.yml                     # Terraform deploy Github Actions in AWS for case glue_etl_job
 ├───airflow
 │   ├───airflow_infra
 |   |   └───Dockerfile                        # contains some configuration of the Airflow Docker image
