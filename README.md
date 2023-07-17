@@ -16,6 +16,9 @@
 
 ### Main projects files
 ```bash
+├───.github
+│   ├───workflows
+|   |   └───terraform.yml                     # Terraform deploy workflow in AWS for case glue_etl_job
 ├───airflow
 │   ├───airflow_infra
 |   |   └───Dockerfile                        # contains some configuration of the Airflow Docker image
@@ -25,6 +28,12 @@
 │       └───dag_apply_data_quality_with_ge.py # Airflow DAG to create EMR, execute Great Expectations script, and terminate the cluster
 |       └───bootstrap-great-expectation.sh    # EMR bootstrap script to install project dependencies
 |       └───emr_config.json                   # EMR configuration to run a cluster
+├───glue_etl_job
+│   ├───terraform            
+|   |   └───main.tf                           # services declaration for deploy in AWS: Glue ETL, IAM, S3 and EventBridge
+|   |   └───providers.tf                      # configration for deploy in AWS provider
+|   |   └───variables.tf                      # declaration variables utilized in Terraform project
+|   └───great_expectation_glue_job.py         # main script for execute great expectation in Glue ETL
 └───script_pyspark_emr
     ├───modules
     |   └───run.py                            # file responsible for defining which function will be executed
